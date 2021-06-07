@@ -4,13 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import hrms.hrms.entities.abstracts.User;
+import hrms.hrms.entities.absracts.User;
 
 @Entity
-@Table(name="employers")
-public class SystemPersonal extends User{
+@Table(name="system_users")
+public class SystemUser extends User{
 	
-	public SystemPersonal(int id, String email, String password, String firstName, String lastName) {
+	public SystemUser(int id, String email, String password, String firstName, String lastName) {
 		super(id, email, password);
 		this.firstName = firstName;
 		this.lastName = lastName;

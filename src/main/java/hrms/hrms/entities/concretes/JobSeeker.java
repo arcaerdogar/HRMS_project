@@ -1,23 +1,37 @@
 package hrms.hrms.entities.concretes;
 
+import java.time.LocalDate;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import hrms.hrms.entities.abstracts.User;
+import hrms.hrms.entities.absracts.User;
+import hrms.hrms.entities.concretes.verifications.JobSeekerVerification;
 
 @Entity
-@Table(name="employers")
+@Table(name="job_seekers")
 public class JobSeeker extends User{
 
+	
+	
 	public JobSeeker(int id, String email, String password, String firstName, String lastName, String nationalId,
-			String birthDate) {
+			LocalDate birthDate, boolean isActive, JobSeekerVerification verification) {
 		super(id, email, password);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.nationalId = nationalId;
 		this.birthDate = birthDate;
+		this.isActive = isActive;
+		this.verification = verification;
 	}
+	public JobSeeker() {
+		
+	}
+	
 	@Column(name="first_name")
 	private String firstName;
 	
@@ -28,7 +42,14 @@ public class JobSeeker extends User{
 	private String nationalId;
 	
 	@Column(name="birth_date")
-	private String birthDate;
+	private LocalDate birthDate;
+	
+	@Column(name="is_active")
+	private boolean isActive;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "verification_id")
+	private JobSeekerVerification verification;
 	
 	public String getFirstName() {
 		return firstName;
@@ -48,11 +69,27 @@ public class JobSeeker extends User{
 	public void setNationalId(String nationalId) {
 		this.nationalId = nationalId;
 	}
-	public String getBirthDate() {
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
-	
+	public boolean isActive() {
+		return isActive;
+	}
+	public void activate() {
+		this.isActive = true;
+	}
+	public void deActivate() {
+		this.isActive = false;
+	}
+
+	public JobSeekerVerification getVerification() {
+		return verification;
+	}
+
+	public void setVerification(JobSeekerVerification verification) {
+		this.verification = verification;
+	}
 }

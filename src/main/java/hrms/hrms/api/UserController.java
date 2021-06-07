@@ -9,29 +9,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import hrms.hrms.business.abstracts.JobService;
+import hrms.hrms.business.abstracts.UserService;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
-import hrms.hrms.entities.concretes.Job;
+import hrms.hrms.entities.absracts.User;
 
 @RestController
-@RequestMapping("/api/jobs")
-public class JobController {
-	JobService jobService;
+@RequestMapping("api/users")
+public class UserController {
+	
+	UserService userService;
 	
 	@Autowired
-	public JobController(JobService jobService) {
-		this.jobService = jobService;
+	public UserController(UserService userService) {
+		this.userService = userService;
 	}
-
-	@PostMapping("/add")
-	public Result add(@RequestBody Job job) {
-		return jobService.add(job);
+	
+	@PostMapping("/register")
+	public Result register(@RequestBody User user) {
+		return userService.register(user);
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<Job>> getAll(){
-		return jobService.getAll();
+	public DataResult<List<User>> getAll(){
+		return userService.getAll();
 	}
-
 }
