@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,42 +19,46 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="jobs")
+@Table(name="cities")
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobAdvertisements"})
-public class Job {
+public class City {
 	
-	public Job(int id, String jobTitle) {
+	public City(int id, String cityTitle) {
 		this.id = id;
-		this.jobTitle = jobTitle;
+		this.cityTitle = cityTitle;
 	}
-	public Job() {
-		
+	public City() {
+
 	}
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "auto_gen")
-	@Column(name="job_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="city_id")
 	private int id;
 	
-	@Column(name="job_title")
-	private String jobTitle;
+	@Column(name="city_title")
+	private String cityTitle;
 	
-	@OneToMany(mappedBy = "job")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
+	
 	private List<JobAdvertisement> jobAdvertisements;
 
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getJobTitle() {
-		return jobTitle;
+
+	public String getCityTitle() {
+		return cityTitle;
 	}
-	public void setJobTitle(String jobTitle) {
-		this.jobTitle = jobTitle;
+
+	public void setCityTitle(String cityTitle) {
+		this.cityTitle = cityTitle;
 	}
 	public List<JobAdvertisement> getJobAdvertisements() {
 		return jobAdvertisements;
@@ -61,5 +66,4 @@ public class Job {
 	public void setJobAdvertisements(List<JobAdvertisement> jobAdvertisements) {
 		this.jobAdvertisements = jobAdvertisements;
 	}
-
 }

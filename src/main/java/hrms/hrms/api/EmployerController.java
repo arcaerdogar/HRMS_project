@@ -13,6 +13,7 @@ import hrms.hrms.business.abstracts.EmployerService;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.entities.concretes.Employer;
+import hrms.hrms.entities.concretes.JobAdvertisement;
 
 @RestController
 @RequestMapping("/api/employers")
@@ -50,4 +51,16 @@ public class EmployerController {
 	{
 		return employerService.verifyBySystemPersonnel(employer);
 	}
+	
+	@GetMapping("/getAdvertisements")
+	public DataResult<List<JobAdvertisement>> getAdvertisements(int employerId){
+		return employerService.getJobAdvertisements(employerId);
+	}
+	
+	@PostMapping("/addAdvertisement")
+	public Result addAdvertisement(int employerId,int jobId,int cityId, @RequestBody JobAdvertisement jobAdvertisement)
+	{
+		return employerService.addAdvertisement(employerId,jobId,cityId, jobAdvertisement);
+	}
+	
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import hrms.hrms.business.Validation.ValidationTool;
 import hrms.hrms.business.abstracts.EmployerService;
+import hrms.hrms.business.abstracts.JobAdvertisementService;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.core.utilities.results.error.ErrorResult;
@@ -14,17 +15,20 @@ import hrms.hrms.core.utilities.results.success.SuccessDataResult;
 import hrms.hrms.core.utilities.results.success.SuccessResult;
 import hrms.hrms.dataAccess.abstracts.EmployerDao;
 import hrms.hrms.entities.concretes.Employer;
+import hrms.hrms.entities.concretes.JobAdvertisement;
 
 @Component
 public class EmployerManager implements EmployerService{
 
 	EmployerDao employerDao;
 	ValidationTool validationTool;
+	JobAdvertisementService jobAdvertisementService;
 	
 	@Autowired
-	public EmployerManager(EmployerDao employerDao,ValidationTool validationTool) {
+	public EmployerManager(EmployerDao employerDao,ValidationTool validationTool,JobAdvertisementService jobAdvertisementService) {
 		this.employerDao=employerDao;
 		this.validationTool=validationTool;
+		this.jobAdvertisementService=jobAdvertisementService;
 	}
 	
 	@Override
@@ -68,6 +72,25 @@ public class EmployerManager implements EmployerService{
 		}
 		employerDao.save(employer);
 		return new SuccessResult("Employer account verified by system personnel.");
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> getJobAdvertisements(int employerId) {
+		return jobAdvertisementService.getByEmployerId(employerId);
+	}
+
+	@Override
+	public Result addAdvertisement(int employerId,int jobId,int cityId, JobAdvertisement jobAdvertisement) {
+		jobAdvertisement.getEmployer().setId(employerId);
+		jobAdvertisement.getJob().setId(jobId);
+		jobAdvertisement.getCity().setId(cityId);
+		return jobAdvertisementService.add(jobAdvertisement);
+	}
+
+	@Override
+	public Result closeJobAdvertisement(int advertId) {
+		
+		return null;
 	}
 	
 }

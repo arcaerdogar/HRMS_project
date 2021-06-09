@@ -1,12 +1,17 @@
 package hrms.hrms.entities.concretes;
 
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import hrms.hrms.entities.absracts.User;
 import hrms.hrms.entities.concretes.verifications.EmployerVerification;
@@ -15,6 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="employers")
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobAdvertisements"})
 public class Employer extends User{
 
 	
@@ -43,6 +49,10 @@ public class Employer extends User{
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="verification_id")
 	private EmployerVerification verification;
+	
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "employer",orphanRemoval = true)
+	
+	private List<JobAdvertisement> jobAdvertisements;
 	
 	public String getCompanyName() {
 		return companyName;
