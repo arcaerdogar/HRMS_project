@@ -42,7 +42,6 @@ public class City {
 	private String cityTitle;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
-	
 	private List<JobAdvertisement> jobAdvertisements;
 
 	public int getId() {

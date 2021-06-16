@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import hrms.hrms.business.abstracts.EmployerVerificationService;
+import hrms.hrms.business.abstracts.verificationServices.EmployerVerificationService;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.entities.concretes.verifications.EmployerVerification;
 

@@ -20,10 +20,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
-	public User(int id, String email, String password) {
+	public User(int id, String email, String password, String profilePhotoUrl) {
+		super();
 		this.id = id;
 		this.email = email;
 		this.password = password;
+		this.profilePhotoUrl = profilePhotoUrl;
 	}
 	public User() {
 		
@@ -38,6 +40,9 @@ public class User {
 	
 	@Column(name="password")
 	private String password;
+	
+	@Column(name="profile_photo_url")
+	private String profilePhotoUrl;
 	
 	public int getId() {
 		return id;
@@ -56,6 +61,12 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getProfilePhotoUrl() {
+		return profilePhotoUrl;
+	}
+	public void setProfilePhotoUrl(String profilePhotoUrl) {
+		this.profilePhotoUrl = profilePhotoUrl;
 	}
 
 }

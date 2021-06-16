@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 
 import hrms.hrms.dataAccess.abstracts.JobSeekerDao;
 import hrms.hrms.dataAccess.abstracts.UserDao;
-import hrms.hrms.entities.concretes.Employer;
-import hrms.hrms.entities.concretes.JobSeeker;
+import hrms.hrms.entities.concretes.users.Employer;
+import hrms.hrms.entities.concretes.users.JobSeeker;
 
 @Component
 public class ValidationTool {

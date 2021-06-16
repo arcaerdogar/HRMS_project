@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import hrms.hrms.business.abstracts.SystemUserService;
+import hrms.hrms.business.abstracts.userServices.SystemUserService;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
-import hrms.hrms.entities.concretes.SystemUser;
+import hrms.hrms.entities.concretes.users.SystemUser;
 
 @RestController
 @RequestMapping("/api/systemusers")

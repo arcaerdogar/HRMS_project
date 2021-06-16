@@ -6,7 +6,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import hrms.hrms.entities.absracts.Verification;
-import hrms.hrms.entities.concretes.Employer;
+import hrms.hrms.entities.concretes.users.Employer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
