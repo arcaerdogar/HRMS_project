@@ -12,8 +12,8 @@ public interface JobSeekerService {
 	Result register(JobSeeker jobSeeker);
 	DataResult<List<JobSeeker>> getAll();
 	Result activate(int id);
-	Result confirmEmail(JobSeeker jobSeeker);
-	Result verifyWithMernis(JobSeeker jobSeeker);
+	Result confirmEmail(int jobSeekerId);
+	Result verifyWithMernis(int jobSeekerId);
 	Result changeProfilePhoto(String Url,int jobSeekerId) throws IOException;
 	DataResult<List<JobSeekerCV>> getCvsByJobSeekerId(int id);
 }

@@ -37,8 +37,8 @@ public class JobSeekerController {
 	}
 	
 	@PostMapping("/confirmEmail")
-	public Result confirmEmail(@RequestBody JobSeeker jobSeeker) {
-		return jobSeekerService.confirmEmail(jobSeeker); 		
+	public Result confirmEmail(int id) {
+		return jobSeekerService.confirmEmail(id); 		
 	}
 	
 	@GetMapping("/getCvsByJobseekerId")

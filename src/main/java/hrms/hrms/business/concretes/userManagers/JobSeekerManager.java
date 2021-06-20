@@ -42,7 +42,9 @@ public class JobSeekerManager implements JobSeekerService{
 		jobSeeker.deActivate();
 		jobSeeker.getVerification().setEmailVerification(false);
 		jobSeeker.getVerification().setMernisVerification(false);
-		jobSeeker.setProfilePhotoUrl("defaultpp.jpg");
+		if(jobSeeker.getProfilePhotoUrl()==null) {
+			jobSeeker.setProfilePhotoUrl("defaultpp.jpg");
+		}
 		String mernisMsg="Mernis verification failed.";
 		if(!ValidationTool.validateJobSeeker(jobSeeker)) {
 			return new ErrorResult("All fields are required.");
@@ -70,7 +72,6 @@ public class JobSeekerManager implements JobSeekerService{
 	public Result activate(int id) {
 		JobSeeker jobSeekerToActivate=jobSeekerDao.getOne(id);
 		jobSeekerToActivate.activate();
-		jobSeekerDao.deleteById(id);
 		jobSeekerDao.save(jobSeekerToActivate);
 		return new SuccessResult("JobSeeker activated");
 	}
@@ -78,8 +79,8 @@ public class JobSeekerManager implements JobSeekerService{
 
 
 	@Override
-	public Result confirmEmail(JobSeeker jobSeeker) {
-		jobSeekerDao.delete(jobSeeker);
+	public Result confirmEmail(int jobSeekerId) {
+		JobSeeker jobSeeker=jobSeekerDao.getOne(jobSeekerId);
 		jobSeeker.getVerification().setEmailVerification(true);
 		if(jobSeeker.getVerification().isMernisVerification()) {
 			jobSeeker.activate();
@@ -91,9 +92,9 @@ public class JobSeekerManager implements JobSeekerService{
 
 
 	@Override
-	public Result verifyWithMernis(JobSeeker jobSeeker) {
+	public Result verifyWithMernis(int jobSeekerId) {
+		JobSeeker jobSeeker=jobSeekerDao.getOne(jobSeekerId);
 		if(FakeMernisService.validate(jobSeeker.getEmail())) {
-			jobSeekerDao.delete(jobSeeker);
 			jobSeeker.getVerification().setMernisVerification(true);;
 			if(jobSeeker.getVerification().isEmailVerification()) {
 				jobSeeker.activate();
